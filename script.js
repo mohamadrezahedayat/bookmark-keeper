@@ -103,17 +103,20 @@ function StoreBookmark(e) {
   e.preventDefault();
   const nameValue = websiteNameEl.value;
   let urlValue = websiteUrlEl.value;
-  if (!urlValue.includes("http://", "https://")) {
+  if (!urlValue.includes("http://") && !urlValue.includes("https://")) {
     urlValue = `https://${urlValue}`;
   }
   //   console.log(urlValue);
   if (!validate(nameValue, urlValue)) {
     return false;
   }
+
   const bookmark = {
     name: nameValue,
     url: urlValue,
   };
+
+  console.log(bookmark);
   bookmarks.push(bookmark);
   localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
   fetchBookmarks();
